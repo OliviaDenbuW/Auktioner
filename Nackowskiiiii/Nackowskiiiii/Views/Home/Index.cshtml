@@ -1,0 +1,40 @@
+﻿@model List<Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel>
+
+@inject RoleManager<IdentityRole> RoleManager
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="page-header">
+    <h1>AUCTIONS <small>Aktuella</small></h1>
+</div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    @if (User.IsInRole("Admin"))
+    {
+        <input 
+               type="button" 
+               class="btn btn-default navbar-btn" 
+               title="Delete" value="Add new auction"
+               onclick="location.href='@Url.Action("CreateNewAuction", "Admin")'"
+        />
+    }
+}
+<br />
+
+@{
+    Html.RenderPartial("_SortingAuctionsDDL");
+}
+
+<br />
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">AKTUELLA AUCTIONS</div><!-- Table -->
+
+        @{
+            Html.RenderPartial("_DisplayAuctions");
+        }   
+</div>

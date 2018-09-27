@@ -1,0 +1,47 @@
+﻿@model Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel
+
+@{
+    ViewData["Title"] = "ViewAuctionDetails";
+}
+
+<h1>Auction details</h1>
+
+<div class="jumbotron">
+    <h2>@Model.Title</h2>
+    <p>@Model.Description</p>
+    <p>@Model.StartDateString</p>
+    <p>@Model.EndDateString</p>
+    <p>@Model.StartPrice</p>
+</div>
+
+<h1>BID</h1>
+<br />
+<form asp-controller="Auction" asp-action="MakeBidOnAuction" method="post">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group">
+                <input type="text" name="bid" class="form-control" placeholder="Bid...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Make bid</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</form>
+<br />
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">BID</div><!-- Table -->
+
+    <table class="table">
+        <tr>
+            <th>Price</th>
+        </tr>
+        <tr>
+            @* LOOPA IGENOM BUDEN OCH LÄGG UT RESPEKTIVE PRIS *@
+            <td>2300</td>
+        </tr>
+    </table>
+</div>
+

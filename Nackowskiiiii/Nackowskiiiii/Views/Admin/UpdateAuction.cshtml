@@ -1,0 +1,41 @@
+﻿@model Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel
+
+@{
+    ViewData["Title"] = "UpdateAuction";
+}
+
+<h2>UpdateAuction</h2>
+
+<form asp-controller="Admin" asp-action="UpdateAuction" method="put">
+    <label asp-for="Title"></label>
+    <br />
+    <input type="text" asp-for="Title" />
+    <br />
+
+    <label asp-for="Description"></label>
+    <br />
+    <input type="text" asp-for="Description" />
+    <br />
+
+    <label asp-for="StartPrice"></label>
+    <br />
+    <input type="text" asp-for="StartPrice" />
+    <br />
+
+    <label asp-for="StartDate"></label>
+    <br />
+    <input asp-for="StartDate" type="datetime-local" />
+    <br />
+
+    <label asp-for="EndDate"></label>
+    <br />
+    <input asp-for="EndDate" type="datetime-local" @*value="" *@ />
+    <br />
+
+    <input
+           type="submit"
+           value="Update"
+           class="btn btn-default navbar-btn"
+           @*onclick="location.href='@Url.Action("UpdateAuction", "Admin")'"*@
+    />
+</form>

@@ -1,0 +1,27 @@
+﻿
+@model List<Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel>
+
+@{
+    ViewData["Title"] = "SearchResult";
+}
+
+<div class="page-header">
+    <h1>AUCTIONS <small>Search result</small></h1>
+</div>
+<br />
+
+@{ 
+    Html.RenderPartial("_SortingAuctionsDDL");
+}
+
+<br />
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">SEARCH RESULT</div><!-- Table -->
+
+        @{
+            Html.RenderPartial("_DisplayAuctions");
+        }
+</div>
+

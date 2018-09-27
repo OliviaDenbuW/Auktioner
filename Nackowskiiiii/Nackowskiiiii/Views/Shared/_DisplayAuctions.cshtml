@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel>
+
+@inject RoleManager<IdentityRole> RoleManager
+
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Start price</th>
+        <th>End date</th>
+    </tr>
+
+    @foreach (var auction in Model)
+    {
+    <tr>
+        <td><a asp-controller="Auction" asp-action="ViewAuctionDetails" asp-route-auctionId=@auction.Id>@auction.Title</a></td>
+        <td>@auction.Description</td>
+        <td>@auction.StartPrice</td>
+        <td>@auction.EndDateString</td>
+        @if (User.Identity.IsAuthenticated)
+        {
+            @if (User.IsInRole("Admin"))
+            {
+                <td>
+                    <input type="button"
+                           class="btn btn-default navbar-btn"
+                           title="Delete" value="Delete"
+                           onclick="location.href='@Url.Action("DeleteAuction", "Admin", new { id = auction.Id })'" />
+                </td>
+                <td>
+                    <input type="button"
+                           class="btn btn-default navbar-btn"
+                           title="Delete" value="Update"
+                           onclick="location.href='@Url.Action("UpdateAuction", "Admin", new { id = auction.Id })'" />
+                </td>
+            }
+        }
+    </tr>
+    }
+</table>
