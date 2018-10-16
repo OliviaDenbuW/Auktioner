@@ -1,0 +1,43 @@
+﻿@model Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <h1>MAKE BID</h1>
+    <br />
+    <form asp-controller="Auction" asp-action="MakeBidOnAuction" method="post">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <input type="number" asp-for="@Model.Id" name="auctionId" hidden="hidden" />
+                    <input type="number" asp-for="@Model.NewBid.Bid" name="bid" class="form-control" placeholder="Bid..." />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">Make bid</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <br />
+}
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">BIDS</div><!-- Table -->
+
+    <table class="table">
+        <tr>
+            <th>Price</th>
+            <th>Bidder</th>
+        </tr>
+
+        @foreach (var bid in Model.Bids)
+        {
+            <tr>
+                <td>@bid.Bid</td>
+                <td>@bid.Bidder</td>
+            </tr>
+        }
+    </table>
+</div>

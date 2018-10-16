@@ -38,7 +38,7 @@ namespace Nackowskiiiii.DataLayer
             }
         }
 
-        public IEnumerable<AuctionModel> GetAllAuctionsDb()
+        public IEnumerable<AuctionModel> GetAllAuctions()
         {
             using (HttpClient client = new HttpClient())
             {
@@ -66,33 +66,26 @@ namespace Nackowskiiiii.DataLayer
 
         public HttpResponseMessage UpdateAuction(AuctionModel currentAuction)
         {
+            var auctionID = GetAllAuctions().FirstOrDefault(x => x.AuktionID == currentAuction.AuktionID).AuktionID;
+            
+            AuctionModel model = new AuctionModel
+            {
+                AuktionID = auctionID,
+                Titel = currentAuction.Titel,
+                Beskrivning = currentAuction.Beskrivning,
+                StartDatum = currentAuction.StartDatum,
+                SlutDatum = currentAuction.SlutDatum,
+                Gruppkod = currentAuction.Gruppkod,
+                Utropspris = currentAuction.Utropspris,
+                SkapadAv = currentAuction.SkapadAv
+            };
+
             using (HttpClient client = new HttpClient())
             {
-                AuctionModel model = new AuctionModel
-                {
-                    AuktionID = currentAuction.AuktionID,
-                    Titel = currentAuction.Titel,
-                    Beskrivning = currentAuction.Beskrivning,
-                    StartDatum = currentAuction.StartDatum,
-                    SlutDatum = currentAuction.SlutDatum,
-                    Gruppkod = currentAuction.Gruppkod,
-                    Utropspris = currentAuction.Utropspris,
-                    SkapadAv = currentAuction.SkapadAv
-                    //AuktionID = "3121",
-                    //Titel = "Watch",
-                    //Beskrivning = "Pink",
-                    //StartDatum = "2018-07-25T00:00:00",
-                    //SlutDatum = "2018-09-02T00:00:00",
-                    //Gruppkod = "1080",
-                    //Utropspris = "2870",
-                    //SkapadAv = "Admin"
-                };
-
                 var modelJson = JsonConvert.SerializeObject(model);
 
                 var stringContent = new StringContent(modelJson, Encoding.UTF8, "application/json");
 
-                //client.BaseAddress = baseAddressAuction;
                 HttpResponseMessage response = client.PutAsync(baseAddressAuction, stringContent).Result;
 
                 return response;
@@ -106,6 +99,40 @@ namespace Nackowskiiiii.DataLayer
                 HttpResponseMessage response = client.DeleteAsync(baseAddressAuction + _apiKey + "/" + id.ToString()).Result;
 
                 return response;
+            }
+        }
+
+        public HttpResponseMessage MakeBid(BidModel bid)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var modelJson = JsonConvert.SerializeObject(bid);
+
+                var stringContent = new StringContent(modelJson, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = client.PostAsync(baseAddressBid, stringContent).Result;
+
+                return response;
+            }
+        }
+
+        public IEnumerable<BidModel> GetBidsForCurrentAuction(int auctionId)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = baseAddressBid;
+ ;
+                client.DefaultRequestHeaders.Accept.Clear();
+
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(IEnumerable<BidModel>));
+
+                HttpResponseMessage response = client.GetAsync(_apiKey + "/" + auctionId.ToString()).Result;
+                response.EnsureSuccessStatusCode();
+                Stream responseStream = response.Content.ReadAsStreamAsync().Result;
+
+                IEnumerable<BidModel> model = (IEnumerable<BidModel>)serializer.ReadObject(responseStream);
+
+                return model;
             }
         }
     }

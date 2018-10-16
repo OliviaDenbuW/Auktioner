@@ -1,4 +1,4 @@
-﻿@model Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel
+﻿@model Nackowskiiiii.Models.AuctionViewModels.TestAuctionViewModel
 
 @{
     ViewData["Title"] = "UpdateAuction";
@@ -6,36 +6,46 @@
 
 <h2>UpdateAuction</h2>
 
-<form asp-controller="Admin" asp-action="UpdateAuction" method="put">
-    <label asp-for="Title"></label>
+<form asp-controller="Admin" asp-action="UpdateAuction" method="post">
+    @*@{
+            Html.RenderPartial("_AuctionForm");
+        }*@
+    <input type="hidden" asp-for="UpdateAuctionViewModel.Id" />
+
+    <label asp-for="UpdateAuctionViewModel.Title"></label>
     <br />
-    <input type="text" asp-for="Title" />
+    <input type="text" asp-for="UpdateAuctionViewModel.Title" />
+    <br />
+    <span asp-validation-for="UpdateAuctionViewModel.Title"></span>
     <br />
 
-    <label asp-for="Description"></label>
+    <label asp-for="UpdateAuctionViewModel.Description"></label>
     <br />
-    <input type="text" asp-for="Description" />
+    <input type="text" asp-for="UpdateAuctionViewModel.Description" />
     <br />
-
-    <label asp-for="StartPrice"></label>
-    <br />
-    <input type="text" asp-for="StartPrice" />
+    <span asp-validation-for="UpdateAuctionViewModel.Description"></span>
     <br />
 
-    <label asp-for="StartDate"></label>
+    <label asp-for="UpdateAuctionViewModel.StartPrice"></label>
     <br />
-    <input asp-for="StartDate" type="datetime-local" />
+    <input type="text" asp-for="UpdateAuctionViewModel.StartPrice" />
     <br />
-
-    <label asp-for="EndDate"></label>
-    <br />
-    <input asp-for="EndDate" type="datetime-local" @*value="" *@ />
+    <span asp-validation-for="UpdateAuctionViewModel.StartPrice"></span>
     <br />
 
-    <input
-           type="submit"
-           value="Update"
-           class="btn btn-default navbar-btn"
-           @*onclick="location.href='@Url.Action("UpdateAuction", "Admin")'"*@
-    />
+    <label asp-for="UpdateAuctionViewModel.StartDateString"></label>
+    <br />
+    <input asp-for="UpdateAuctionViewModel.StartDateString" type="datetime-local" />
+    <br />
+    <span asp-validation-for="UpdateAuctionViewModel.StartDateString"></span>
+    <br />
+
+    <label asp-for="UpdateAuctionViewModel.EndDateString"></label>
+    <br />
+    <input asp-for="UpdateAuctionViewModel.EndDateString" type="datetime-local" />
+    <br />
+    <span asp-validation-for="UpdateAuctionViewModel.EndDateString"></span>
+    <br />
+
+    <input type="submit" value="Update" class="btn btn-default navbar-btn" />
 </form>

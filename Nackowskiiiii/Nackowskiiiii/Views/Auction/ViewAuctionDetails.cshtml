@@ -1,4 +1,8 @@
-﻿@model Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel
+﻿@*@model Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel*@
+@model Nackowskiiiii.Models.AuctionViewModels.TestAuctionViewModel
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "ViewAuctionDetails";
@@ -7,41 +11,42 @@
 <h1>Auction details</h1>
 
 <div class="jumbotron">
-    <h2>@Model.Title</h2>
-    <p>@Model.Description</p>
-    <p>@Model.StartDateString</p>
-    <p>@Model.EndDateString</p>
-    <p>@Model.StartPrice</p>
+    @*<h2><label asp-for="Title"></label>: @Model.Title</h2>
+        <p><label asp-for="Description"></label>: @Model.Description</p>
+        <p><label asp-for="EndDateString"></label>: @Model.EndDateString</p>
+        <p><label asp-for="StartPrice"></label>: @Model.StartPrice kr</p>*@
+
+    <h2><label asp-for="AuctionDetilsViewModel.Title"></label>: @Model.AuctionDetilsViewModel.Title</h2>
+    <p><label asp-for="AuctionDetilsViewModel.Description"></label>: @Model.AuctionDetilsViewModel.Description</p>
+    <p><label asp-for="AuctionDetilsViewModel.EndDateString"></label>: @Model.AuctionDetilsViewModel.EndDateString</p>
+    <p><label asp-for="AuctionDetilsViewModel.StartPrice"></label>: @Model.AuctionDetilsViewModel.StartPrice kr</p>
+
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        @*@if (User.IsInRole("Admin"))*@
+        @if (Model.AuctionDetilsViewModel.CreatedBy == User.Identity.Name)
+        {
+            <input type="button"
+                   class="btn btn-default navbar-btn"
+                   title="Delete" value="Delete"
+                   onclick="location.href='@Url.Action("DeleteAuction", "Admin", new { auctionId = Model.AuctionDetilsViewModel.Id })'" />
+            <br />
+
+            <input type="button"
+                   class="btn btn-default navbar-btn"
+                   title="Delete" value="Update"
+                   onclick="location.href='@Url.Action("UpdateAuction", "Admin", new { id = Model.AuctionDetilsViewModel.Id })'" />
+        }
+    }
 </div>
 
-<h1>BID</h1>
-<br />
-<form asp-controller="Auction" asp-action="MakeBidOnAuction" method="post">
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="input-group">
-                <input type="text" name="bid" class="form-control" placeholder="Bid...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="submit">Make bid</button>
-                </span>
-            </div>
-        </div>
-    </div>
-</form>
-<br />
-
-<div class="panel panel-default">
-    <!-- Default panel contents -->
-    <div class="panel-heading">BID</div><!-- Table -->
-
-    <table class="table">
-        <tr>
-            <th>Price</th>
-        </tr>
-        <tr>
-            @* LOOPA IGENOM BUDEN OCH LÄGG UT RESPEKTIVE PRIS *@
-            <td>2300</td>
-        </tr>
-    </table>
-</div>
+@if (Model.AuctionDetilsViewModel.AuctionIsOpen == true)
+{
+    Html.RenderPartial("_OpenAuctionDetails");
+}
+else
+{
+    Html.RenderPartial("_ClosedAuctionDetails");
+}
 

@@ -1,0 +1,43 @@
+﻿@model Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+
+
+<label asp-for="Title"></label>
+<br />
+<input type="text" asp-for="Title" />
+<br />
+<span asp-validation-for="Title"></span>
+<br />
+
+<label asp-for="Description"></label>
+<br />
+<input type="text" asp-for="Description" />
+<br />
+<span asp-validation-for="Description"></span>
+<br />
+
+<label asp-for="StartPrice"></label>
+<br />
+<input type="text" asp-for="StartPrice" />
+<br />
+<span asp-validation-for="StartPrice"></span>
+<br />
+
+<label asp-for="StartDateString"></label>
+<br />
+<input asp-for="StartDateString" type="datetime-local" />
+<br />
+<span asp-validation-for="StartDateString"></span>
+<br />
+
+<label asp-for="EndDateString"></label>
+<br />
+<input asp-for="EndDateString" type="datetime-local" />
+<br />
+<span asp-validation-for="EndDateString"></span>
+<br />
+
+@*<input type="submit" value="Create" class="btn btn-default navbar-btn" />*@

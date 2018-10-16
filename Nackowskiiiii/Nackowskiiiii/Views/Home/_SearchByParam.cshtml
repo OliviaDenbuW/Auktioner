@@ -1,0 +1,26 @@
+﻿@model Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel
+
+<h4>AuctionViewModel</h4>
+
+<form asp-controller="Auction" asp-action="SearchForAuctionWithParam" method="post">
+    <div class="input-group">
+        <input type="text"
+               name="searchInput"
+               class="form-control"
+               placeholder="Search for auction..." />
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Search by...
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="/Auction/SearchForAuctionWithParam" name="title">End date</a></li>
+                <li><a href="/Home/SearchForAuctionWithParam">Start price</a></li>
+            </ul>
+        </div>
+
+        <input type="submit"
+               value="Search" />
+    </div>
+</form>
+

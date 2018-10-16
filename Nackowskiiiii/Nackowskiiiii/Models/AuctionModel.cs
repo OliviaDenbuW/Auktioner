@@ -21,12 +21,8 @@ namespace Nackowskiiiii.Models
         [DataMember]
         public string StartDatum { get; set; }
 
-        public DateTime StartDatumDateTime { get; set; }
-
         [DataMember]
         public string SlutDatum { get; set; }
-
-        public DateTime SlutDatumDateTime { get; set; }
 
         [DataMember]
         public string Gruppkod { get; set; }

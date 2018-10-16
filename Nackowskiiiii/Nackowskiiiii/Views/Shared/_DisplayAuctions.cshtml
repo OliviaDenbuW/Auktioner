@@ -17,24 +17,6 @@
         <td>@auction.Description</td>
         <td>@auction.StartPrice</td>
         <td>@auction.EndDateString</td>
-        @if (User.Identity.IsAuthenticated)
-        {
-            @if (User.IsInRole("Admin"))
-            {
-                <td>
-                    <input type="button"
-                           class="btn btn-default navbar-btn"
-                           title="Delete" value="Delete"
-                           onclick="location.href='@Url.Action("DeleteAuction", "Admin", new { id = auction.Id })'" />
-                </td>
-                <td>
-                    <input type="button"
-                           class="btn btn-default navbar-btn"
-                           title="Delete" value="Update"
-                           onclick="location.href='@Url.Action("UpdateAuction", "Admin", new { id = auction.Id })'" />
-                </td>
-            }
-        }
     </tr>
     }
 </table>

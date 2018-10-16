@@ -9,7 +9,7 @@ namespace Nackowskiiiii.Models.AuctionViewModels
     {
         public int Id { get; set; }
 
-        public decimal Price { get; set; }
+        public decimal Bid { get; set; }
 
         public int AuctionId { get; set; }
 

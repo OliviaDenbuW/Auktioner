@@ -10,18 +10,76 @@
 </div>
 <br />
 
-@{ 
-    Html.RenderPartial("_SortingAuctionsDDL");
-}
 
+@*@{
+    Html.RenderPartial("_FilterAuctionsDDL");
+}*@
+<br />
+
+@*<div class="row">
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input type="text" class="form-control" name="placeholder="Search for auction..." aria-label="...">
+            <div class="input-group-btn">
+                <button name="searc" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">By... <span class="caret"></span></button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="/Auction/SearchForAuctionWithParam">Title</a></li>
+                    <li><a href="#">Another action</a></li>
+                </ul>
+            </div><!-- /btn-group -->
+        </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->*@
+@*<form asp-controller="Auction" asp-action="SearchForAuctionWithParam" method="post">
+        <div class="input-group">
+            <input type="text"
+                   name="searchInput"
+                   class="form-control"
+                   placeholder="Search by..." />
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Search by...
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="/Auction/SearchForAuctionWithParam">End date</a></li>
+                    <li><a href="/Home/SearchForAuctionWithParam">Start price</a></li>
+                </ul>
+            </div>
+
+            <input type="submit"
+                   value="Search" />
+        </div>
+    </form>
+    @*<form asp-controller="Auction" asp-action="SearchForAuctionWithParam" method="post">
+            <div class="input-group">
+                <input type="text"
+                       name="searchInput"
+                       class="form-control"
+                       placeholder="Search for auction..." />
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Search by...
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="/Home/SearchForAuctionWithParam">End date</a></li>
+                        <li><a href="/Home/SearchForAuctionWithParam">Start price</a></li>
+                    </ul>
+                </div>
+
+                <input type="submit"
+                       value="Search" />
+            </div>
+    </form>*@
 <br />
 
 <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading">SEARCH RESULT</div><!-- Table -->
 
-        @{
-            Html.RenderPartial("_DisplayAuctions");
-        }
+    @{
+        Html.RenderPartial("_DisplayAuctions");
+    }
 </div>
 

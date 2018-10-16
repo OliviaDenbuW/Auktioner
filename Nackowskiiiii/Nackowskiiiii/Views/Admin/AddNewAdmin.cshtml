@@ -1,0 +1,32 @@
+﻿@model Nackowskiiiii.Models.UserViewModels.AdminViewModel
+
+@{
+    ViewData["Title"] = "AddNewAdmin";
+}
+
+<h2>Add new admin</h2>
+
+<form asp-controller="Admin" asp-action="AddNewAdmin" method="post">
+    <label asp-for="Email"></label>
+    <br />
+    <input type="text" asp-for="Email" />
+    <br />
+    <span asp-validation-for="Email"></span>
+    <br />
+
+    <label asp-for="Password"></label>
+    <br />
+    <input type="password" asp-for="Password" />
+    <br />
+    <span asp-validation-for="Password"></span>
+    <br />
+
+    <label asp-for="ConfirmationPassword"></label>
+    <br />
+    <input type="password" asp-for="ConfirmationPassword" />
+    <br />
+    <span asp-validation-for="ConfirmationPassword"></span>
+    <br />
+
+    <input type="submit" value="Add" />
+</form>

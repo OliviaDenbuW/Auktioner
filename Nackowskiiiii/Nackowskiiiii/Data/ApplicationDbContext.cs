@@ -25,5 +25,7 @@ namespace Nackowskiiiii.Data
         }
 
         public DbSet<Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel> AuctionViewModel { get; set; }
+
+        public DbSet<Nackowskiiiii.Models.AuctionViewModels.UpdateAuctionViewModel> UpdateAuctionViewModel { get; set; }
     }
 }

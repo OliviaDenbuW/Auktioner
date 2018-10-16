@@ -12,39 +12,26 @@ namespace Nackowskiiiii.Controllers
 {
     public class HomeController : Controller
     {
-        private IRegularBusinessService _businessService;
+        private IBusinessService _businessService;
 
-        public HomeController(IRegularBusinessService businessService)
+        public HomeController(IBusinessService businessService)
         {
             _businessService = businessService;
         }
 
         public IActionResult Index()
         {
-            //Korrigera till att det bara är de som är aktuella och inte alla
-            //List<AuctionViewModel> auctions = _businessService.GetSelectedAuctions();
+            List<AuctionViewModel> openAuctions = _businessService.GetAllOpenAuctions();
 
-            List<AuctionViewModel> auctions = _businessService.GetAllAuctionsDb();
-
-            return View(auctions);
+            return View(openAuctions);
         }
 
         [HttpPost]
         public IActionResult SearchForAuction(string searchInput)
-        {            
+        {
             List<AuctionViewModel> searchResult = _businessService.GetAuctionSearchResult(searchInput);
 
             return View("SearchResult", searchResult);
-        }
-
-        public void SortAuctionByStartPrice()
-        {
-            
-        }
-
-        public void SortAuctionByEndDate()
-        {
-
         }
 
         public IActionResult Error()

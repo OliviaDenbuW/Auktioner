@@ -11,10 +11,14 @@ namespace Nackowskiiiii.DataLayer
     {
         HttpResponseMessage CreateNewAuction(AuctionModel newAuction);
 
-        IEnumerable<AuctionModel> GetAllAuctionsDb();
+        IEnumerable<AuctionModel> GetAllAuctions();
 
         HttpResponseMessage UpdateAuction(AuctionModel currentAuction);
 
         HttpResponseMessage DeleteAuction(int id);
+
+        HttpResponseMessage MakeBid(BidModel bid);
+
+        IEnumerable<BidModel> GetBidsForCurrentAuction(int auctionId);
     }
 }

@@ -13,6 +13,7 @@ using Nackowskiiiii.Models;
 using Nackowskiiiii.Services;
 using Nackowskiiiii.BusinessLayer;
 using Nackowskiiiii.DataLayer;
+using Nackowskiiiii.Services.Identity;
 
 namespace Nackowskiiiii
 {
@@ -39,9 +40,10 @@ namespace Nackowskiiiii
             services.AddTransient<IEmailSender, EmailSender>();
 
             //Registrera klasserna som används i de olika skikten
-            services.AddScoped<IRegularBusinessService, RegularBusinessService>();
-            services.AddScoped<IAdminBusinessService, AdminBusinessService>();
+            services.AddScoped<IBusinessService, BusinessService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuctionRepository, AuctionRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddMvc();
         }

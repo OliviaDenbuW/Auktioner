@@ -1,4 +1,8 @@
-﻿@model Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel
+﻿@model Nackowskiiiii.Models.AuctionViewModels.TestAuctionViewModel
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
 
 @{
     ViewData["Title"] = "CreateNewAuction";
@@ -7,30 +11,43 @@
 <h2>CreateNewAuction</h2>
 
 <form asp-controller="Admin" asp-action="CreateNewAuction" method="post">
-    <label asp-for="Title"></label>
+    @*@{
+                Html.RenderPartial("_AuctionForm", Model);
+        }*@
+    <label asp-for="CreateAuctionViewModel.Title"></label>
     <br />
-    <input type="text" asp-for="Title" />
+    <input type="text" asp-for="CreateAuctionViewModel.Title" />
     <br />
-
-    <label asp-for="Description"></label>
-    <br />
-    <input type="text" asp-for="Description" />
-    <br />
-
-    <label asp-for="StartPrice"></label>
-    <br />
-    <input type="text" asp-for="StartPrice" />
-    <br />
-    
-    <label asp-for="StartDate"></label>
-    <br />
-    <input asp-for="StartDate" type="datetime-local" />
+    <span asp-validation-for="CreateAuctionViewModel.Title"></span>
     <br />
 
-    <label asp-for="EndDate"></label>
+    <label asp-for="CreateAuctionViewModel.Description"></label>
     <br />
-    <input asp-for="EndDate" type="datetime-local" @*value=""*@ />
+    <input type="text" asp-for="CreateAuctionViewModel.Description" />
+    <br />
+    <span asp-validation-for="CreateAuctionViewModel.Description"></span>
     <br />
 
-    <input type="submit" value="Create" class="btn btn-default navbar-btn"/>
+    <label asp-for="CreateAuctionViewModel.StartPrice"></label>
+    <br />
+    <input type="text" asp-for="CreateAuctionViewModel.StartPrice" />
+    <br />
+    <span asp-validation-for="CreateAuctionViewModel.StartPrice"></span>
+    <br />
+
+    <label asp-for="CreateAuctionViewModel.StartDateString"></label>
+    <br />
+    <input asp-for="CreateAuctionViewModel.StartDateString" type="datetime-local" />
+    <br />
+    <span asp-validation-for="CreateAuctionViewModel.StartDateString"></span>
+    <br />
+
+    <label asp-for="CreateAuctionViewModel.EndDateString"></label>
+    <br />
+    <input asp-for="CreateAuctionViewModel.EndDateString" type="datetime-local" />
+    <br />
+    <span asp-validation-for="CreateAuctionViewModel.EndDateString"></span>
+    <br />
+
+    <input type="submit" value="Create" class="btn btn-default navbar-btn" />
 </form>
