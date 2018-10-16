@@ -149,6 +149,7 @@ namespace Nackowskiiiii.BusinessLayer
         //    return viewModel;
         //}
 
+        //TODO Testkommentar med Felle
         public TestAuctionViewModel TestConvertViewModel(AuctionViewModel input)
         {
             TestAuctionViewModel viewModel = new TestAuctionViewModel
