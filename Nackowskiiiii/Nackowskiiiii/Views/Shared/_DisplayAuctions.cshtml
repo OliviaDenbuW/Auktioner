@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel>
+﻿@*@model IEnumerable<Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel>*@
+@model IEnumerable<Nackowskiiiii.Models.AuctionViewModels.TestAuctionViewModel>
 
 @inject RoleManager<IdentityRole> RoleManager
 
@@ -12,11 +13,11 @@
 
     @foreach (var auction in Model)
     {
-    <tr>
-        <td><a asp-controller="Auction" asp-action="ViewAuctionDetails" asp-route-auctionId=@auction.Id>@auction.Title</a></td>
-        <td>@auction.Description</td>
-        <td>@auction.StartPrice</td>
-        <td>@auction.EndDateString</td>
-    </tr>
+        <tr>
+            <td><a asp-controller="Auction" asp-action="ViewAuctionDetails" asp-route-auctionId=@auction.GeneralAuctionViewModel.Id>@auction.GeneralAuctionViewModel.Title</a></td>
+            <td>@auction.GeneralAuctionViewModel.Description</td>
+            <td>@auction.GeneralAuctionViewModel.StartPrice</td>
+            <td>@auction.GeneralAuctionViewModel.EndDateString</td>
+        </tr>
     }
 </table>

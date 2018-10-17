@@ -21,7 +21,7 @@ namespace Nackowskiiiii.Controllers
 
         public IActionResult Index()
         {
-            List<AuctionViewModel> openAuctions = _businessService.GetAllOpenAuctions();
+            List<TestAuctionViewModel> openAuctions = _businessService.TestGetAllOpenAuctions();
 
             return View(openAuctions);
         }

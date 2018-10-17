@@ -44,8 +44,13 @@ namespace Nackowskiiiii.BusinessLayer
         //bool UsernameIsUnique(string newUsername);
         #endregion
 
+        //TODO ta bort om ovan fungerar
         List<AuctionViewModel> GetAllAuctions();
 
+        //Test
+        IEnumerable<TestAuctionViewModel> TestCreateAuctionListIEnumerable(IEnumerable<AuctionModel> auctions);
+
+        //TODO ta bort om ovan fungerar
         List<AuctionViewModel> CreateAuctionList(IEnumerable<AuctionModel> auctions);
 
         AuctionModel MakeAuctionApiReady(AuctionViewModel viewModel);
@@ -64,7 +69,8 @@ namespace Nackowskiiiii.BusinessLayer
 
         List<AuctionViewModel> GetAuctionSearchResult(string searchInput);
 
-        List<AuctionViewModel> GetAllOpenAuctions();
+        //Test
+        List<TestAuctionViewModel> TestGetAllOpenAuctions();
 
         //Test
         bool TestGetAuctionIsOpen(int auctionId);
