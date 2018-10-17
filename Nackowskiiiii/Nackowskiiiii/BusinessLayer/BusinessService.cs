@@ -39,11 +39,13 @@ namespace Nackowskiiiii.BusinessLayer
         }
 
         #region Admin
+        //Klar
         public HttpResponseMessage CreateNewAuction(AuctionModel newAuction)
         {
             return _auctionRepository.CreateNewAuction(newAuction);
         }
 
+        //TODO (fixa så AuctionIsOpen får värde i GetCreateViewModel (nu i controller i createAuctionMethod)
         public CreateAuctionViewModel GetCreateViewModel(TestAuctionViewModel input)
         {
             CreateAuctionViewModel viewModel = new CreateAuctionViewModel
@@ -60,6 +62,7 @@ namespace Nackowskiiiii.BusinessLayer
             return viewModel;
         }
 
+        //Klar
         public AuctionModel MakeAuctionApiReady(CreateAuctionViewModel viewModel)
         {
             AuctionModel model = new AuctionModel
@@ -76,22 +79,6 @@ namespace Nackowskiiiii.BusinessLayer
 
             return model;
         }
-        //Jämför med den nedanför (ta kanske bort den här)
-        //public AuctionViewModel ConvertViewModel(CreateAuctionViewModel input)
-        //{
-        //    AuctionViewModel viewModel = new AuctionViewModel
-        //    {
-        //        Title = input.Title,
-        //        Description = input.Description,
-        //        StartDateString = input.StartDateString,
-        //        EndDateString = input.EndDateString,
-        //        GroupCode = _apiKey,
-        //        StartPrice = input.StartPrice,
-        //        CreatedBy = _userService.GetCurrentUserName()/*_admin*/,
-        //    };
-
-        //    return viewModel;
-        //}
 
         public HttpResponseMessage UpdateAuction(AuctionModel model)
         {
@@ -150,6 +137,29 @@ namespace Nackowskiiiii.BusinessLayer
         //}
 
         //TODO Testkommentar med Felle
+
+        //Test
+        public TestAuctionViewModel TestConvertViewModel(GeneralAuctionViewModel input)
+        {
+            TestAuctionViewModel viewModel = new TestAuctionViewModel
+            {
+                GeneralAuctionViewModel = new GeneralAuctionViewModel
+                {
+                    Id = input.Id,
+                    Title = input.Title,
+                    Description = input.Description,
+                    StartDateString = input.StartDateString,
+                    EndDateString = input.EndDateString,
+                    GroupCode = _apiKey,
+                    StartPrice = input.StartPrice,
+                    CreatedBy = input.CreatedBy
+                }
+            };
+
+            return viewModel;
+        }
+
+        //TODO Kanske ta bort om ovan funkar
         public TestAuctionViewModel TestConvertViewModel(AuctionViewModel input)
         {
             TestAuctionViewModel viewModel = new TestAuctionViewModel
@@ -193,15 +203,6 @@ namespace Nackowskiiiii.BusinessLayer
         }
         #endregion
 
-        public AuctionViewModel GetAuctionById(int id)
-        {
-            IEnumerable<AuctionModel> allAuctions = _auctionRepository.GetAllAuctions();
-            AuctionModel model = allAuctions.SingleOrDefault(x => x.AuktionID == id.ToString());
-            AuctionViewModel viewModel = CreateAuctionViewModel(model);
-
-            return viewModel;
-        }
-
         public List<AuctionViewModel> GetAllAuctions()
         {
             IEnumerable<AuctionModel> allAuctions = _auctionRepository.GetAllAuctions();
@@ -223,7 +224,7 @@ namespace Nackowskiiiii.BusinessLayer
                     GroupCode = _apiKey,
                     StartPrice = decimal.Parse(auctionDb.Utropspris),
                     CreatedBy = _admin
-                    //AuctionIsOpen = GetAuctionIsOpen(Int32.Parse(auctionDb.AuktionID))
+                    //AuctionIsOpen = TestGetAuctionIsOpen(Int32.Parse(auctionDb.AuktionID))
                 }).OrderBy(x => x.Title).ToList();
 
             return viewModelList;
@@ -246,6 +247,27 @@ namespace Nackowskiiiii.BusinessLayer
             return model;
         }
 
+        //Test
+        public GeneralAuctionViewModel CreateGeneralAuctionViewModel(AuctionModel model)
+        {
+            GeneralAuctionViewModel viewModel = new GeneralAuctionViewModel
+            {
+                Id = Int32.Parse(model.AuktionID),
+                Title = model.Titel,
+                Description = model.Beskrivning,
+                StartDateString = model.StartDatum,
+                EndDateString = model.SlutDatum,
+                GroupCode = _apiKey,
+                StartPrice = decimal.Parse(model.Utropspris),
+                CreatedBy = model.SkapadAv/*_admin*/,
+                //AuctionIsOpen = TestGetAuctionIsOpen(Int32.Parse(model.AuktionID)),
+                Bids = GetAllBidViewModelsForCurrentAuction(Int32.Parse(model.AuktionID))
+            };
+
+            return viewModel;
+        }
+
+        //TODO: Kanske ta bort om ovan funkar
         public AuctionViewModel CreateAuctionViewModel(AuctionModel model)
         {
             AuctionViewModel viewModel = new AuctionViewModel
@@ -259,8 +281,28 @@ namespace Nackowskiiiii.BusinessLayer
                 StartPrice = decimal.Parse(model.Utropspris),
                 CreatedBy = _admin,
                 Bids = GetAllBidViewModelsForCurrentAuction(Int32.Parse(model.AuktionID))
-                //AuctionIsOpen = GetAuctionIsOpen(Int32.Parse(model.AuktionID))
+                //AuctionIsOpen = TestGetAuctionIsOpen(Int32.Parse(model.AuktionID))
             };
+
+            return viewModel;
+        }
+
+        //Test
+        public GeneralAuctionViewModel TestGetAuctionById(int id)
+        {
+            IEnumerable<AuctionModel> allAuctions = _auctionRepository.GetAllAuctions();
+            AuctionModel model = allAuctions.SingleOrDefault(x => x.AuktionID == id.ToString());
+            GeneralAuctionViewModel viewModel = CreateGeneralAuctionViewModel(model);
+
+            return viewModel;
+        }
+
+        //TODO Kanske ta bort den här sen om ovan funkar
+        public AuctionViewModel GetAuctionById(int id)
+        {
+            IEnumerable<AuctionModel> allAuctions = _auctionRepository.GetAllAuctions();
+            AuctionModel model = allAuctions.SingleOrDefault(x => x.AuktionID == id.ToString());
+            AuctionViewModel viewModel = CreateAuctionViewModel(model);
 
             return viewModel;
         }
@@ -320,7 +362,7 @@ namespace Nackowskiiiii.BusinessLayer
 
             foreach (var auction in allAuctionsTemp)
             {
-                bool auctionIsOpen = GetAuctionIsOpen(auction.Id);
+                bool auctionIsOpen = TestGetAuctionIsOpen(auction.Id);
 
                 if (auctionIsOpen == true)
                 {
@@ -336,11 +378,13 @@ namespace Nackowskiiiii.BusinessLayer
             return openAuctions;
         }
 
-        public bool GetAuctionIsOpen(int auctionId)
+        //Test
+        public bool TestGetAuctionIsOpen(int auctionId)
         {
-            AuctionViewModel currentAuction = GetAuctionById(auctionId);
+            GeneralAuctionViewModel testCurrentAuction = TestGetAuctionById(auctionId);
+            //AuctionViewModel currentAuction = GetAuctionById(auctionId);
             String todaysDate = DateTime.Now.ToString("yyyy-MM-ddTHH:mm");
-            String endDateAuction = currentAuction.EndDateString;
+            String endDateAuction = testCurrentAuction.EndDateString;
 
             DateTime todayConverted = DateTime.Parse(todaysDate);
             DateTime endDateConverted = DateTime.Parse(endDateAuction);
@@ -356,6 +400,28 @@ namespace Nackowskiiiii.BusinessLayer
                 return false;
             }
         }
+
+        //TODO kanske ta bort om ovan funkar
+        //public bool GetAuctionIsOpen(int auctionId)
+        //{
+        //    AuctionViewModel currentAuction = GetAuctionById(auctionId);
+        //    String todaysDate = DateTime.Now.ToString("yyyy-MM-ddTHH:mm");
+        //    String endDateAuction = currentAuction.EndDateString;
+
+        //    DateTime todayConverted = DateTime.Parse(todaysDate);
+        //    DateTime endDateConverted = DateTime.Parse(endDateAuction);
+
+        //    if (endDateConverted > todayConverted)
+        //    {
+        //        //currentAuction.AuctionIsOpen = true;
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        //currentAuction.AuctionIsOpen = false;
+        //        return false;
+        //    }
+        //}
 
         #region Bid
         public HttpResponseMessage MakeBid(BidModel currentBid)

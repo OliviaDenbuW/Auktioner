@@ -54,13 +54,26 @@ namespace Nackowskiiiii.Controllers
 
         public IActionResult ViewAuctionDetails(int auctionId)
         {
-            AuctionViewModel currentAuction = _businessService.GetAuctionById(auctionId);
+            GeneralAuctionViewModel currentAuction = _businessService.TestGetAuctionById(auctionId);
+            TestAuctionViewModel testViewModel = _businessService.TestConvertViewModel(currentAuction);
 
-            currentAuction.AuctionIsOpen = _businessService.GetAuctionIsOpen(auctionId);
-            currentAuction.HighestBidForAuction = _businessService.GetHighestBidForAuction(auctionId);
+            testViewModel.GeneralAuctionViewModel.AuctionIsOpen = _businessService.TestGetAuctionIsOpen(auctionId);
+            testViewModel.GeneralAuctionViewModel.HighestBidForAuction = _businessService.GetHighestBidForAuction(auctionId);
 
-            return View(currentAuction);
+            //currentAuction.HighestBidForAuction = _businessService.GetHighestBidForAuction(auctionId);
+
+            return View(testViewModel);
         }
+
+        //public IActionResult ViewAuctionDetails(int auctionId)
+        //{
+        //    AuctionViewModel currentAuction = _businessService.GetAuctionById(auctionId);
+
+        //    currentAuction.AuctionIsOpen = _businessService.GetAuctionIsOpen(auctionId);
+        //    currentAuction.HighestBidForAuction = _businessService.GetHighestBidForAuction(auctionId);
+
+        //    return View(currentAuction);
+        //}
 
         [HttpPost]
         public IActionResult MakeBidOnAuction(BidViewModel viewModel)

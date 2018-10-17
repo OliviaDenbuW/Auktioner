@@ -7,7 +7,9 @@ namespace Nackowskiiiii.Models.AuctionViewModels
 {
     public class TestAuctionViewModel
     {
-        public AuctionDetailsViewModel AuctionDetilsViewModel { get; set; }
+        public GeneralAuctionViewModel GeneralAuctionViewModel { get; set; }
+
+        public AuctionDetailsViewModel AuctionDetailsViewModel { get; set; }
 
         public CreateAuctionViewModel CreateAuctionViewModel { get; set; }
 

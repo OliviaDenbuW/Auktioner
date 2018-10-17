@@ -12,13 +12,14 @@ namespace Nackowskiiiii.BusinessLayer
     public interface IBusinessService
     {
         #region Admin
+        //Klar
         HttpResponseMessage CreateNewAuction(AuctionModel newAuction);
 
+        //TODO (fixa så AuctionIsOpen får värde i GetCreateViewModel (nu i controller i createAuctionMethod)
         CreateAuctionViewModel GetCreateViewModel(TestAuctionViewModel input);
 
+        //Klar
         AuctionModel MakeAuctionApiReady(CreateAuctionViewModel viewModel);
-
-        //AuctionViewModel ConvertViewModel(CreateAuctionViewModel viewModel);
 
         HttpResponseMessage UpdateAuction(AuctionModel currentAuction);
 
@@ -28,6 +29,10 @@ namespace Nackowskiiiii.BusinessLayer
 
         //UpdateAuctionViewModel ConvertViewModel(AuctionViewModel viewModel);
 
+        //Test
+        TestAuctionViewModel TestConvertViewModel(GeneralAuctionViewModel input);
+
+        //TODO kanske ta bort om ovan funkar
         TestAuctionViewModel TestConvertViewModel(AuctionViewModel input);
 
         AuctionViewModel ConvertViewModel(UpdateAuctionViewModel input);
@@ -45,13 +50,27 @@ namespace Nackowskiiiii.BusinessLayer
 
         AuctionModel MakeAuctionApiReady(AuctionViewModel viewModel);
 
+        //Test
+        GeneralAuctionViewModel CreateGeneralAuctionViewModel(AuctionModel model);
+
+        //TODO kanske ta bort om ovan funkar
+        AuctionViewModel CreateAuctionViewModel(AuctionModel model);
+
+        //test
+        GeneralAuctionViewModel TestGetAuctionById(int id);
+
+        //TODO kanske ta bort om ovan funkar
         AuctionViewModel GetAuctionById(int id);
 
         List<AuctionViewModel> GetAuctionSearchResult(string searchInput);
 
         List<AuctionViewModel> GetAllOpenAuctions();
 
-        bool GetAuctionIsOpen(int auctionId);
+        //Test
+        bool TestGetAuctionIsOpen(int auctionId);
+
+        //TODO kanske ta bort om ovan funkar
+        //bool GetAuctionIsOpen(int auctionId);
 
         #region Bid
         HttpResponseMessage MakeBid(BidModel bid);

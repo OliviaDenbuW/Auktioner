@@ -16,32 +16,32 @@
         <p><label asp-for="EndDateString"></label>: @Model.EndDateString</p>
         <p><label asp-for="StartPrice"></label>: @Model.StartPrice kr</p>*@
 
-    <h2><label asp-for="AuctionDetilsViewModel.Title"></label>: @Model.AuctionDetilsViewModel.Title</h2>
-    <p><label asp-for="AuctionDetilsViewModel.Description"></label>: @Model.AuctionDetilsViewModel.Description</p>
-    <p><label asp-for="AuctionDetilsViewModel.EndDateString"></label>: @Model.AuctionDetilsViewModel.EndDateString</p>
-    <p><label asp-for="AuctionDetilsViewModel.StartPrice"></label>: @Model.AuctionDetilsViewModel.StartPrice kr</p>
+    <h2><label asp-for="@Model.GeneralAuctionViewModel.Title"></label>: @Model.GeneralAuctionViewModel.Title</h2>
+    <p><label asp-for="@Model.GeneralAuctionViewModel.Description"></label>: @Model.GeneralAuctionViewModel.Description</p>
+    <p><label asp-for="@Model.GeneralAuctionViewModel.EndDateString"></label>: @Model.GeneralAuctionViewModel.EndDateString</p>
+    <p><label asp-for="@Model.GeneralAuctionViewModel.StartPrice"></label>: @Model.GeneralAuctionViewModel.StartPrice kr</p>
 
 
     @if (User.Identity.IsAuthenticated)
     {
         @*@if (User.IsInRole("Admin"))*@
-        @if (Model.AuctionDetilsViewModel.CreatedBy == User.Identity.Name)
+        @if (Model.GeneralAuctionViewModel.CreatedBy == User.Identity.Name)
         {
             <input type="button"
                    class="btn btn-default navbar-btn"
                    title="Delete" value="Delete"
-                   onclick="location.href='@Url.Action("DeleteAuction", "Admin", new { auctionId = Model.AuctionDetilsViewModel.Id })'" />
+                   onclick="location.href='@Url.Action("DeleteAuction", "Admin", new { auctionId = Model.GeneralAuctionViewModel.Id })'" />
             <br />
 
             <input type="button"
                    class="btn btn-default navbar-btn"
                    title="Delete" value="Update"
-                   onclick="location.href='@Url.Action("UpdateAuction", "Admin", new { id = Model.AuctionDetilsViewModel.Id })'" />
+                   onclick="location.href='@Url.Action("UpdateAuction", "Admin", new { id = Model.GeneralAuctionViewModel.Id })'" />
         }
     }
 </div>
 
-@if (Model.AuctionDetilsViewModel.AuctionIsOpen == true)
+@if (Model.GeneralAuctionViewModel.AuctionIsOpen == true)
 {
     Html.RenderPartial("_OpenAuctionDetails");
 }

@@ -13266,11 +13266,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Olivia\\Desktop\\Inlämningar ASP.NET 2\\Auktioner\\Nackowskiiiii\\Nackowskiiiii\\Nackowskiiiii.csproj",
+      "projectUniqueName": "C:\\Users\\Olivia\\Desktop\\Inlämningar ASP.NET 2\\nakowskis-auction\\Nackowskiiiii\\Nackowskiiiii\\Nackowskiiiii.csproj",
       "projectName": "Nackowskiiiii",
-      "projectPath": "C:\\Users\\Olivia\\Desktop\\Inlämningar ASP.NET 2\\Auktioner\\Nackowskiiiii\\Nackowskiiiii\\Nackowskiiiii.csproj",
+      "projectPath": "C:\\Users\\Olivia\\Desktop\\Inlämningar ASP.NET 2\\nakowskis-auction\\Nackowskiiiii\\Nackowskiiiii\\Nackowskiiiii.csproj",
       "packagesPath": "C:\\Users\\Olivia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Olivia\\Desktop\\Inlämningar ASP.NET 2\\Auktioner\\Nackowskiiiii\\Nackowskiiiii\\obj\\",
+      "outputPath": "C:\\Users\\Olivia\\Desktop\\Inlämningar ASP.NET 2\\nakowskis-auction\\Nackowskiiiii\\Nackowskiiiii\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

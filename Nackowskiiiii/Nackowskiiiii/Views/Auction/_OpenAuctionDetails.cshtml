@@ -1,4 +1,5 @@
-﻿@model Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel
+﻿@*@model Nackowskiiiii.Models.AuctionViewModels.AuctionViewModel*@
+@model Nackowskiiiii.Models.AuctionViewModels.TestAuctionViewModel
 
 @inject SignInManager<ApplicationUser> SignInManager
 
@@ -10,8 +11,8 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="input-group">
-                    <input type="number" asp-for="@Model.Id" name="auctionId" hidden="hidden" />
-                    <input type="number" asp-for="@Model.NewBid.Bid" name="bid" class="form-control" placeholder="Bid..." />
+                    <input type="number" asp-for="@Model.GeneralAuctionViewModel.Id" name="auctionId" hidden="hidden" />
+                    <input type="number" asp-for="@Model.GeneralAuctionViewModel.NewBid.Bid" name="bid" class="form-control" placeholder="Bid..." />
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="submit">Make bid</button>
                     </span>
@@ -32,7 +33,7 @@
             <th>Bidder</th>
         </tr>
 
-        @foreach (var bid in Model.Bids)
+        @foreach (var bid in Model.GeneralAuctionViewModel.Bids)
         {
             <tr>
                 <td>@bid.Bid</td>

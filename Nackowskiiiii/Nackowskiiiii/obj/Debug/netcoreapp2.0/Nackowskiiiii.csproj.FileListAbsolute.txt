@@ -22,3 +22,15 @@ C:\Users\Olivia\Desktop\Inlämningar ASP.NET 2\Auktioner\Nackowskiiiii\Nackowski
 C:\Users\Olivia\Desktop\Inlämningar ASP.NET 2\Auktioner\Nackowskiiiii\Nackowskiiiii\obj\Debug\netcoreapp2.0\Nackowskiiiii.AssemblyInfo.cs
 C:\Users\Olivia\Desktop\Inlämningar ASP.NET 2\Auktioner\Nackowskiiiii\Nackowskiiiii\obj\Debug\netcoreapp2.0\Nackowskiiiii.dll
 C:\Users\Olivia\Desktop\Inlämningar ASP.NET 2\Auktioner\Nackowskiiiii\Nackowskiiiii\obj\Debug\netcoreapp2.0\Nackowskiiiii.pdb
+C:\Users\Olivia\Desktop\Inlämningar ASP.NET 2\nakowskis-auction\Nackowskiiiii\Nackowskiiiii\bin\Debug\netcoreapp2.0\Nackowskiiiii.deps.json
+C:\Users\Olivia\Desktop\Inlämningar ASP.NET 2\nakowskis-auction\Nackowskiiiii\Nackowskiiiii\bin\Debug\netcoreapp2.0\Nackowskiiiii.runtimeconfig.json
+C:\Users\Olivia\Desktop\Inlämningar ASP.NET 2\nakowskis-auction\Nackowskiiiii\Nackowskiiiii\bin\Debug\netcoreapp2.0\Nackowskiiiii.runtimeconfig.dev.json
+C:\Users\Olivia\Desktop\Inlämningar ASP.NET 2\nakowskis-auction\Nackowskiiiii\Nackowskiiiii\bin\Debug\netcoreapp2.0\Nackowskiiiii.dll
+C:\Users\Olivia\Desktop\Inlämningar ASP.NET 2\nakowskis-auction\Nackowskiiiii\Nackowskiiiii\bin\Debug\netcoreapp2.0\Nackowskiiiii.pdb
+C:\Users\Olivia\Desktop\Inlämningar ASP.NET 2\nakowskis-auction\Nackowskiiiii\Nackowskiiiii\obj\Debug\netcoreapp2.0\Nackowskiiiii.csprojAssemblyReference.cache
+C:\Users\Olivia\Desktop\Inlämningar ASP.NET 2\nakowskis-auction\Nackowskiiiii\Nackowskiiiii\obj\Debug\netcoreapp2.0\Nackowskiiiii.csproj.CoreCompileInputs.cache
+C:\Users\Olivia\Desktop\Inlämningar ASP.NET 2\nakowskis-auction\Nackowskiiiii\Nackowskiiiii\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\Olivia\Desktop\Inlämningar ASP.NET 2\nakowskis-auction\Nackowskiiiii\Nackowskiiiii\obj\Debug\netcoreapp2.0\Nackowskiiiii.AssemblyInfoInputs.cache
+C:\Users\Olivia\Desktop\Inlämningar ASP.NET 2\nakowskis-auction\Nackowskiiiii\Nackowskiiiii\obj\Debug\netcoreapp2.0\Nackowskiiiii.AssemblyInfo.cs
+C:\Users\Olivia\Desktop\Inlämningar ASP.NET 2\nakowskis-auction\Nackowskiiiii\Nackowskiiiii\obj\Debug\netcoreapp2.0\Nackowskiiiii.dll
+C:\Users\Olivia\Desktop\Inlämningar ASP.NET 2\nakowskis-auction\Nackowskiiiii\Nackowskiiiii\obj\Debug\netcoreapp2.0\Nackowskiiiii.pdb

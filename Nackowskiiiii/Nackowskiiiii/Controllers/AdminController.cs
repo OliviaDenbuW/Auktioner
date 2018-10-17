@@ -38,11 +38,13 @@ namespace Nackowskiiiii.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //TODO Kolla om man blir directad till Getten av Create??
         public IActionResult CreateNewAuction(TestAuctionViewModel newAuction)
         {
             if (ModelState.IsValid)
             {
                 CreateAuctionViewModel viewModel = _businessService.GetCreateViewModel(newAuction);
+                //viewModel.AuctionIsOpen = _businessService.TestGetAuctionIsOpen(viewModel.Id);
 
                 AuctionModel model = _businessService.MakeAuctionApiReady(viewModel);
 
@@ -53,43 +55,29 @@ namespace Nackowskiiiii.Controllers
                     return RedirectToAction("Index", "Home", new { message = "Auction has successfully been created" });
                 }
 
-                return RedirectToAction("CreateNewAuction", "Admin", new { auctionId = viewModel.Id, message = "Auction failed to be created" });
+                //TODO Kolla om man blir directad till Getten av Create??
+                return RedirectToAction("CreateNewAuction", "Admin", new { message = "Auction failed to be created" });
             }
 
             return View(newAuction);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult CreateNewAuction(TestAuctionViewModel input)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        AuctionViewModel viewModel = _businessService.ConvertViewModel(input.CreateAuctionViewModel);
-
-        //        AuctionModel model = _businessService.MakeAuctionApiReady(viewModel);
-
-        //        HttpResponseMessage response = _businessService.CreateNewAuction(model);
-
-        //        if (response.IsSuccessStatusCode == true)
-        //        {
-        //            return RedirectToAction("Index", "Home", new { message = "Auction has successfully been created" });
-        //        }
-
-        //        return RedirectToAction("CreateNewAuction", "Admin", new { auctionId = viewModel.Id, message = "Auction failed to be created" });
-        //    }
-
-        //    return View(input);
-        //}
-
         public IActionResult UpdateAuction(int id)
         {
-            AuctionViewModel currentAuction = _businessService.GetAuctionById(id);
+            GeneralAuctionViewModel currentAuction = _businessService.TestGetAuctionById(id);
             TestAuctionViewModel testViewModel = _businessService.TestConvertViewModel(currentAuction);
-            //UpdateAuctionViewModel viewModel = _businessService.ConvertViewModel(currentAuction);
 
             return View(testViewModel);
         }
+
+        //public IActionResult UpdateAuction(int id)
+        //{
+        //    AuctionViewModel currentAuction = _businessService.GetAuctionById(id);
+        //    TestAuctionViewModel testViewModel = _businessService.TestConvertViewModel(currentAuction);
+        //    //UpdateAuctionViewModel viewModel = _businessService.ConvertViewModel(currentAuction);
+
+        //    return View(testViewModel);
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
