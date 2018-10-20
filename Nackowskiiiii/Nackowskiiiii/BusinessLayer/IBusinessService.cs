@@ -11,7 +11,7 @@ namespace Nackowskiiiii.BusinessLayer
 {
     public interface IBusinessService
     {
-        #region Admin
+        #region Create
         //Klar
         HttpResponseMessage CreateNewAuction(AuctionModel newAuction);
 
@@ -20,20 +20,20 @@ namespace Nackowskiiiii.BusinessLayer
 
         //Klar
         AuctionModel MakeAuctionApiReady(CreateAuctionViewModel viewModel);
+        #endregion
 
+        #region Update
         HttpResponseMessage UpdateAuction(AuctionModel currentAuction);
 
         UpdateAuctionViewModel GetUpdateViewModel(TestAuctionViewModel viewModel);
 
         AuctionModel MakeAuctionApiReady(UpdateAuctionViewModel viewModel);
+        #endregion
 
-        //UpdateAuctionViewModel ConvertViewModel(AuctionViewModel viewModel);
-
-        //Test
+        #region General
+        //Klar
         TestAuctionViewModel TestConvertViewModel(GeneralAuctionViewModel input);
-
-        //TODO kanske ta bort om ovan funkar
-        TestAuctionViewModel TestConvertViewModel(AuctionViewModel input);
+        #endregion
 
         AuctionViewModel ConvertViewModel(UpdateAuctionViewModel input);
 
@@ -42,10 +42,10 @@ namespace Nackowskiiiii.BusinessLayer
         //void AddNewAdmin(AdminViewModel newAdmin);
 
         //bool UsernameIsUnique(string newUsername);
-        #endregion
+        
 
-        //TODO ta bort om ovan fungerar
-        List<AuctionViewModel> GetAllAuctions();
+        //Klar TODO: KOlla TestCreateAuctionListEnum
+        IEnumerable<TestAuctionViewModel> TestGetAllAuctions();
 
         //Test
         IEnumerable<TestAuctionViewModel> TestCreateAuctionListIEnumerable(IEnumerable<AuctionModel> auctions);
@@ -67,10 +67,17 @@ namespace Nackowskiiiii.BusinessLayer
         //TODO kanske ta bort om ovan funkar
         AuctionViewModel GetAuctionById(int id);
 
-        List<AuctionViewModel> GetAuctionSearchResult(string searchInput);
+        //TODO Välj ha kvar OM någon förklarar hur man kan skicka två olika modeller in i samma partial (Index och searchResult för _display)
+        //IEnumerable<TestAuctionViewModel> SetSearchAuctionViewModelList(IEnumerable<TestAuctionViewModel> auctions);
 
         //Test
-        List<TestAuctionViewModel> TestGetAllOpenAuctions();
+        IEnumerable<TestAuctionViewModel> TEstGetAuctionSearchResult(string searchInput);
+
+        //TODO Ta bort om ovan funkar
+        List<AuctionViewModel> GetAuctionSearchResult(string searchInput);
+
+        //Klar
+        IEnumerable<TestAuctionViewModel> GetOpenAuctions();
 
         //Test
         bool TestGetAuctionIsOpen(int auctionId);

@@ -70,15 +70,6 @@ namespace Nackowskiiiii.Controllers
             return View(testViewModel);
         }
 
-        //public IActionResult UpdateAuction(int id)
-        //{
-        //    AuctionViewModel currentAuction = _businessService.GetAuctionById(id);
-        //    TestAuctionViewModel testViewModel = _businessService.TestConvertViewModel(currentAuction);
-        //    //UpdateAuctionViewModel viewModel = _businessService.ConvertViewModel(currentAuction);
-
-        //    return View(testViewModel);
-        //}
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult UpdateAuction(TestAuctionViewModel currentAuction)
@@ -101,29 +92,6 @@ namespace Nackowskiiiii.Controllers
 
             return View(currentAuction);
         }
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult UpdateAuction(TestAuctionViewModel input)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        AuctionViewModel viewModel = _businessService.ConvertViewModel(input.UpdateAuctionViewModel);
-
-        //        AuctionModel model = _businessService.MakeAuctionApiReady(viewModel);
-
-        //        HttpResponseMessage response = _businessService.UpdateAuction(model);
-
-        //        if (response.IsSuccessStatusCode == true)
-        //        {
-        //            return RedirectToAction("ViewAuctionDetails", "Auction", new { auctionId = viewModel.Id, message = "Auction was successfully updated" });
-        //        }
-
-        //        return RedirectToAction("ViewAuctionDetails", "Auction", new { auctionId = viewModel.Id, message = "Auction has not been updated" });
-        //    }
-
-        //    return View(input);
-        //}
 
         public IActionResult DeleteAuction(int auctionId)
         {

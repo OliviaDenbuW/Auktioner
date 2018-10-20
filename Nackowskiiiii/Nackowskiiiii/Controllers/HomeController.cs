@@ -21,7 +21,7 @@ namespace Nackowskiiiii.Controllers
 
         public IActionResult Index()
         {
-            List<TestAuctionViewModel> openAuctions = _businessService.TestGetAllOpenAuctions();
+            IEnumerable<TestAuctionViewModel> openAuctions = _businessService.GetOpenAuctions();
 
             return View(openAuctions);
         }
@@ -29,7 +29,8 @@ namespace Nackowskiiiii.Controllers
         [HttpPost]
         public IActionResult SearchForAuction(string searchInput)
         {
-            List<AuctionViewModel> searchResult = _businessService.GetAuctionSearchResult(searchInput);
+            //List<AuctionViewModel> searchResult = _businessService.GetAuctionSearchResult(searchInput);
+            IEnumerable<TestAuctionViewModel> searchResult = _businessService.TEstGetAuctionSearchResult(searchInput);
 
             return View("SearchResult", searchResult);
         }

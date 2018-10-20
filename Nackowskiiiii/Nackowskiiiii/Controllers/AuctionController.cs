@@ -65,16 +65,6 @@ namespace Nackowskiiiii.Controllers
             return View(testViewModel);
         }
 
-        //public IActionResult ViewAuctionDetails(int auctionId)
-        //{
-        //    AuctionViewModel currentAuction = _businessService.GetAuctionById(auctionId);
-
-        //    currentAuction.AuctionIsOpen = _businessService.GetAuctionIsOpen(auctionId);
-        //    currentAuction.HighestBidForAuction = _businessService.GetHighestBidForAuction(auctionId);
-
-        //    return View(currentAuction);
-        //}
-
         [HttpPost]
         public IActionResult MakeBidOnAuction(BidViewModel viewModel)
         {

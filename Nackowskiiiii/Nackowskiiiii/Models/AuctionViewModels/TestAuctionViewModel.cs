@@ -16,5 +16,7 @@ namespace Nackowskiiiii.Models.AuctionViewModels
         public UpdateAuctionViewModel UpdateAuctionViewModel { get; set; }
 
         public SortAuctionViewModel SortAuctionViewModel { get; set; }
+
+        public SearchAuctionViewModel SearchAuctionViewModel { get; set; }
     }
 }
