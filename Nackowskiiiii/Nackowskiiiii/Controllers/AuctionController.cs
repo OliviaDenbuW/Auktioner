@@ -57,7 +57,7 @@ namespace Nackowskiiiii.Controllers
             GeneralAuctionViewModel currentAuction = _businessService.GetAuctionById(auctionId);
             TestAuctionViewModel testViewModel = _businessService.TestConvertViewModel(currentAuction);
 
-            testViewModel.GeneralAuctionViewModel.AuctionIsOpen = _businessService.TestGetAuctionIsOpen(auctionId);
+            testViewModel.GeneralAuctionViewModel.AuctionIsOpen = _businessService.GetAuctionIsOpen(auctionId);
             testViewModel.GeneralAuctionViewModel.HighestBidForAuction = _businessService.GetHighestBidForAuction(auctionId);
 
             //currentAuction.HighestBidForAuction = _businessService.GetHighestBidForAuction(auctionId);

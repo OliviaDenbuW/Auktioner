@@ -9,8 +9,6 @@ namespace Nackowskiiiii.Models.AuctionViewModels
     {
         public GeneralAuctionViewModel GeneralAuctionViewModel { get; set; }
 
-        public AuctionDetailsViewModel AuctionDetailsViewModel { get; set; }
-
         public CreateAuctionViewModel CreateAuctionViewModel { get; set; }
 
         public UpdateAuctionViewModel UpdateAuctionViewModel { get; set; }

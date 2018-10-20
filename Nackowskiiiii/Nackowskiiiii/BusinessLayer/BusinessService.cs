@@ -220,26 +220,6 @@ namespace Nackowskiiiii.BusinessLayer
             return viewModel;
         }
 
-        //TODO: Kanske ta bort om ovan funkar
-        public AuctionViewModel CreateAuctionViewModel(AuctionModel model)
-        {
-            AuctionViewModel viewModel = new AuctionViewModel
-            {
-                Id = Int32.Parse(model.AuktionID),
-                Title = model.Titel,
-                Description = model.Beskrivning,
-                StartDateString = model.StartDatum,
-                EndDateString = model.SlutDatum,
-                GroupCode = _apiKey,
-                StartPrice = decimal.Parse(model.Utropspris),
-                CreatedBy = _admin,
-                Bids = GetAllBidViewModelsForCurrentAuction(Int32.Parse(model.AuktionID))
-                //AuctionIsOpen = TestGetAuctionIsOpen(Int32.Parse(model.AuktionID))
-            };
-
-            return viewModel;
-        }
-
         //TODO KOlla vart den ska ligga och om den används
         public decimal GetMinValidBid(int auctionId)
         {
@@ -298,9 +278,9 @@ namespace Nackowskiiiii.BusinessLayer
 
             if (searchInput != null)
             {
-                IEnumerable<TestAuctionViewModel> searchResult = allAuctions.Where(
-                                                           auction => auction.GeneralAuctionViewModel.Title.ToLower().Contains(searchInput.ToLower()) ||
-                                                           auction.GeneralAuctionViewModel.Description.ToLower().Contains(searchInput.ToLower())).ToList();
+                IEnumerable<TestAuctionViewModel> searchResult = allAuctions.Where(auction =>
+                                                                      auction.GeneralAuctionViewModel.Title.ToLower().Contains(searchInput.ToLower()) ||
+                                                                      auction.GeneralAuctionViewModel.Description.ToLower().Contains(searchInput.ToLower())).ToList();
 
                 //IEnumerable<TestAuctionViewModel> searchResult = searchResultTest.Where(
                 //                                           auction => auction.SearchAuctionViewModel.Title.ToLower().Contains(searchInput.ToLower()) ||
@@ -324,13 +304,12 @@ namespace Nackowskiiiii.BusinessLayer
             return openAuctions;
         }
 
-        //Test
-        public bool TestGetAuctionIsOpen(int auctionId)
+        public bool GetAuctionIsOpen(int auctionId)
         {
-            GeneralAuctionViewModel viewModel = GetAuctionById(auctionId);
+            GeneralAuctionViewModel currentAuction = GetAuctionById(auctionId);
 
             String todaysDate = DateTime.Now.ToString("yyyy-MM-ddTHH:mm");
-            String endDateAuction = viewModel.EndDateString;
+            String endDateAuction = currentAuction.EndDateString;
 
             DateTime todayConverted = DateTime.Parse(todaysDate);
             DateTime endDateConverted = DateTime.Parse(endDateAuction);

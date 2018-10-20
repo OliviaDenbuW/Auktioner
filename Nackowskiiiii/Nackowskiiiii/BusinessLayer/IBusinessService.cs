@@ -45,12 +45,9 @@ namespace Nackowskiiiii.BusinessLayer
 
         //TODO Ta bort om jag sen märker att den inte behövdes
         AuctionModel MakeAuctionApiReady(GeneralAuctionViewModel viewModel);
-
-        //Test
+        
+        //Klar
         GeneralAuctionViewModel CreateGeneralAuctionViewModel(AuctionModel model);
-
-        //TODO kanske ta bort om ovan funkar
-        AuctionViewModel CreateAuctionViewModel(AuctionModel model);
 
         //test
         GeneralAuctionViewModel GetAuctionById(int id);
@@ -64,11 +61,7 @@ namespace Nackowskiiiii.BusinessLayer
         //Klar
         IEnumerable<TestAuctionViewModel> GetOpenAuctions();
 
-        //Test
-        bool TestGetAuctionIsOpen(int auctionId);
-
-        //TODO kanske ta bort om ovan funkar
-        //bool GetAuctionIsOpen(int auctionId);
+        bool GetAuctionIsOpen(int auctionId);
 
         #region Bid
         HttpResponseMessage MakeBid(BidModel bid);
