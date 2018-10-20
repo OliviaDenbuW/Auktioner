@@ -64,7 +64,7 @@ namespace Nackowskiiiii.Controllers
 
         public IActionResult UpdateAuction(int id)
         {
-            GeneralAuctionViewModel currentAuction = _businessService.TestGetAuctionById(id);
+            GeneralAuctionViewModel currentAuction = _businessService.GetAuctionById(id);
             TestAuctionViewModel testViewModel = _businessService.TestConvertViewModel(currentAuction);
 
             return View(testViewModel);

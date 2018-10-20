@@ -54,7 +54,7 @@ namespace Nackowskiiiii.Controllers
 
         public IActionResult ViewAuctionDetails(int auctionId)
         {
-            GeneralAuctionViewModel currentAuction = _businessService.TestGetAuctionById(auctionId);
+            GeneralAuctionViewModel currentAuction = _businessService.GetAuctionById(auctionId);
             TestAuctionViewModel testViewModel = _businessService.TestConvertViewModel(currentAuction);
 
             testViewModel.GeneralAuctionViewModel.AuctionIsOpen = _businessService.TestGetAuctionIsOpen(auctionId);

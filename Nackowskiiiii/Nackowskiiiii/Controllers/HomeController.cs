@@ -30,7 +30,7 @@ namespace Nackowskiiiii.Controllers
         public IActionResult SearchForAuction(string searchInput)
         {
             //List<AuctionViewModel> searchResult = _businessService.GetAuctionSearchResult(searchInput);
-            IEnumerable<TestAuctionViewModel> searchResult = _businessService.TEstGetAuctionSearchResult(searchInput);
+            IEnumerable<TestAuctionViewModel> searchResult = _businessService.GetSearchResult(searchInput);
 
             return View("SearchResult", searchResult);
         }

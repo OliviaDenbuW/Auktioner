@@ -104,23 +104,6 @@ namespace Nackowskiiiii.BusinessLayer
             return viewModel;
         }
 
-        public AuctionViewModel ConvertViewModel(UpdateAuctionViewModel input)
-        {
-            AuctionViewModel viewModel = new AuctionViewModel
-            {
-                Id = input.Id,
-                Title = input.Title,
-                Description = input.Description,
-                StartDateString = input.StartDateString,
-                EndDateString = input.EndDateString,
-                GroupCode = _apiKey,
-                StartPrice = input.StartPrice,
-                CreatedBy = _admin,
-            };
-
-            return viewModel;
-        }
-
         public AuctionModel MakeAuctionApiReady(UpdateAuctionViewModel viewModel)
         {
             AuctionModel model = new AuctionModel
@@ -145,7 +128,6 @@ namespace Nackowskiiiii.BusinessLayer
             return _auctionRepository.DeleteAuction(id);
         }
         #endregion
-
 
         //Klar
         public TestAuctionViewModel TestConvertViewModel(GeneralAuctionViewModel currentAuction)
@@ -173,55 +155,35 @@ namespace Nackowskiiiii.BusinessLayer
         public IEnumerable<TestAuctionViewModel> TestGetAllAuctions()
         {
             IEnumerable<AuctionModel> allAuctions = _auctionRepository.GetAllAuctions();
-            IEnumerable<TestAuctionViewModel> viewModelList = TestCreateAuctionListIEnumerable(allAuctions);
+            IEnumerable<TestAuctionViewModel> viewModelList = SetGeneralAuctionViewModelList(allAuctions);
 
             return viewModelList;
         }
 
-        //Test
-        public IEnumerable<TestAuctionViewModel> TestCreateAuctionListIEnumerable(IEnumerable<AuctionModel> auctions)
+        //Klar TODO Fixa så att AuctionIsOpen sätts här
+        public IEnumerable<TestAuctionViewModel> SetGeneralAuctionViewModelList(IEnumerable<AuctionModel> auctions)
         {
-            var viewModelList =
-            auctions.Select(x => new TestAuctionViewModel
-            {
-                GeneralAuctionViewModel = new GeneralAuctionViewModel
+            var viewModelList = auctions.Select(x => new TestAuctionViewModel
                 {
-                    Id = Int32.Parse(x.AuktionID),
-                    Title = x.Titel,
-                    Description = x.Beskrivning,
-                    StartDateString = x.StartDatum,
-                    EndDateString = x.SlutDatum,
-                    GroupCode = _apiKey,
-                    StartPrice = decimal.Parse(x.Utropspris),
-                    CreatedBy = _admin
+                    GeneralAuctionViewModel = new GeneralAuctionViewModel
+                    {
+                        Id = Int32.Parse(x.AuktionID),
+                        Title = x.Titel,
+                        Description = x.Beskrivning,
+                        StartDateString = x.StartDatum,
+                        EndDateString = x.SlutDatum,
+                        GroupCode = _apiKey,
+                        StartPrice = decimal.Parse(x.Utropspris),
+                        CreatedBy = _admin
                         //AuctionIsOpen = TestGetAuctionIsOpen(Int32.Parse(auctionDb.AuktionID))
-                }
-            }).OrderBy(auction => auction.GeneralAuctionViewModel.Title);
+                    }
+                }).OrderBy(auction => auction.GeneralAuctionViewModel.Title);
 
             return viewModelList;
         }
 
-        //TODO Ta bort om ovan fungerar
-        public List<AuctionViewModel> CreateAuctionList(IEnumerable<AuctionModel> auctions)
-        {
-            List<AuctionViewModel> viewModelList = auctions
-                .Select(auctionDb => new AuctionViewModel()
-                {
-                    Id = Int32.Parse(auctionDb.AuktionID),
-                    Title = auctionDb.Titel,
-                    Description = auctionDb.Beskrivning,
-                    StartDateString = auctionDb.StartDatum,
-                    EndDateString = auctionDb.SlutDatum,
-                    GroupCode = _apiKey,
-                    StartPrice = decimal.Parse(auctionDb.Utropspris),
-                    CreatedBy = _admin
-                    //AuctionIsOpen = TestGetAuctionIsOpen(Int32.Parse(auctionDb.AuktionID))
-                }).OrderBy(x => x.Title).ToList();
-
-            return viewModelList;
-        }
-
-        public AuctionModel MakeAuctionApiReady(AuctionViewModel viewModel)
+        //TODO Ta bort om jag sen märker att den inte behövdes
+        public AuctionModel MakeAuctionApiReady(GeneralAuctionViewModel viewModel)
         {
             AuctionModel model = new AuctionModel
             {
@@ -291,7 +253,8 @@ namespace Nackowskiiiii.BusinessLayer
             }
             else
             {
-                AuctionViewModel viewModel = GetAuctionById(auctionId);
+                GeneralAuctionViewModel viewModel = GetAuctionById(auctionId);
+
                 decimal startPrice = viewModel.StartPrice;
                 minValidBid = startPrice + 1;
             }
@@ -300,21 +263,11 @@ namespace Nackowskiiiii.BusinessLayer
         }
 
         //Test
-        public GeneralAuctionViewModel TestGetAuctionById(int id)
+        public GeneralAuctionViewModel GetAuctionById(int id)
         {
             IEnumerable<AuctionModel> allAuctions = _auctionRepository.GetAllAuctions();
             AuctionModel model = allAuctions.SingleOrDefault(x => x.AuktionID == id.ToString());
             GeneralAuctionViewModel viewModel = CreateGeneralAuctionViewModel(model);
-
-            return viewModel;
-        }
-
-        //TODO Kanske ta bort den här sen om ovan funkar
-        public AuctionViewModel GetAuctionById(int id)
-        {
-            IEnumerable<AuctionModel> allAuctions = _auctionRepository.GetAllAuctions();
-            AuctionModel model = allAuctions.SingleOrDefault(x => x.AuktionID == id.ToString());
-            AuctionViewModel viewModel = CreateAuctionViewModel(model);
 
             return viewModel;
         }
@@ -335,11 +288,11 @@ namespace Nackowskiiiii.BusinessLayer
         //    return viewModelList;
         //}
 
-        //Test
-        public IEnumerable<TestAuctionViewModel> TEstGetAuctionSearchResult(string searchInput)
+        //Klar
+        public IEnumerable<TestAuctionViewModel> GetSearchResult(string searchInput)
         {
             IEnumerable<AuctionModel> allAuctionsDb = _auctionRepository.GetAllAuctions();
-            IEnumerable<TestAuctionViewModel> allAuctions = TestCreateAuctionListIEnumerable(allAuctionsDb);
+            IEnumerable<TestAuctionViewModel> allAuctions = SetGeneralAuctionViewModelList(allAuctionsDb);
 
             //IEnumerable<TestAuctionViewModel> searchResultTest = SetSearchAuctionViewModelList(allAuctions);
 
@@ -359,35 +312,11 @@ namespace Nackowskiiiii.BusinessLayer
             return allAuctions;
         }
 
-        //TODO Ta bort om ovan funkar
-        public List<AuctionViewModel> GetAuctionSearchResult(string searchInput)
-        {
-            IEnumerable<AuctionModel> allAuctionsDb = _auctionRepository.GetAllAuctions();
-            
-            List<AuctionViewModel> searchResult = new List<AuctionViewModel>();
-
-            if (searchInput != null)
-            {
-                IEnumerable<AuctionModel> searchResultDb = allAuctionsDb.Where(
-                                                            auction => auction.Titel.ToLower().Contains(searchInput.ToLower()) ||
-                                                            auction.Beskrivning.ToLower().Contains(searchInput.ToLower()));
-
-                searchResult = CreateAuctionList(searchResultDb);
-            }
-            else
-            {
-                searchResult = CreateAuctionList(allAuctionsDb);
-            }
-                
-
-            return searchResult;
-        }
-
         //Klar
         public IEnumerable<TestAuctionViewModel> GetOpenAuctions()
         {
             IEnumerable<AuctionModel> allAuctionsDb = _auctionRepository.GetAllAuctions();
-            IEnumerable<TestAuctionViewModel> allAuctions = TestCreateAuctionListIEnumerable(allAuctionsDb);
+            IEnumerable<TestAuctionViewModel> allAuctions = SetGeneralAuctionViewModelList(allAuctionsDb);
 
             IEnumerable<TestAuctionViewModel> openAuctions = allAuctions.
                                                            Where(auction => auction.GeneralAuctionViewModel.AuctionIsOpen == false).ToList();
@@ -398,10 +327,10 @@ namespace Nackowskiiiii.BusinessLayer
         //Test
         public bool TestGetAuctionIsOpen(int auctionId)
         {
-            GeneralAuctionViewModel testCurrentAuction = TestGetAuctionById(auctionId);
-            //AuctionViewModel currentAuction = GetAuctionById(auctionId);
+            GeneralAuctionViewModel viewModel = GetAuctionById(auctionId);
+
             String todaysDate = DateTime.Now.ToString("yyyy-MM-ddTHH:mm");
-            String endDateAuction = testCurrentAuction.EndDateString;
+            String endDateAuction = viewModel.EndDateString;
 
             DateTime todayConverted = DateTime.Parse(todaysDate);
             DateTime endDateConverted = DateTime.Parse(endDateAuction);
@@ -504,7 +433,7 @@ namespace Nackowskiiiii.BusinessLayer
 
         public bool GetCurrentBidIsValid(decimal newBid, int auctionId)
         {
-            AuctionViewModel viewModel = GetAuctionById(auctionId);
+            GeneralAuctionViewModel viewModel = GetAuctionById(auctionId);
 
             decimal currentHighestBid = GetHighestBidForAuction(auctionId);
             decimal startPrice = viewModel.StartPrice;
