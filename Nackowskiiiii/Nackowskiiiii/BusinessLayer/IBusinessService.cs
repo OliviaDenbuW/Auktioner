@@ -16,7 +16,7 @@ namespace Nackowskiiiii.BusinessLayer
         HttpResponseMessage CreateNewAuction(AuctionModel newAuction);
 
         //TODO (fixa så AuctionIsOpen får värde i GetCreateViewModel (nu i controller i createAuctionMethod)
-        CreateAuctionViewModel GetCreateViewModel(TestAuctionViewModel input);
+        CreateAuctionViewModel SetCreateViewModel(TestAuctionViewModel input);
 
         //Klar
         AuctionModel MakeAuctionApiReady(CreateAuctionViewModel viewModel);

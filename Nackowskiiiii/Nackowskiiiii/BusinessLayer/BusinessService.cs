@@ -39,30 +39,27 @@ namespace Nackowskiiiii.BusinessLayer
         }
 
         #region Create
-        //Klar
         public HttpResponseMessage CreateNewAuction(AuctionModel newAuction)
         {
             return _auctionRepository.CreateNewAuction(newAuction);
         }
 
-        //TODO (fixa så AuctionIsOpen får värde i GetCreateViewModel (nu i controller i createAuctionMethod)
-        public CreateAuctionViewModel GetCreateViewModel(TestAuctionViewModel input)
+        public CreateAuctionViewModel SetCreateViewModel(TestAuctionViewModel newAuction)
         {
             CreateAuctionViewModel viewModel = new CreateAuctionViewModel
             {
-                Title = input.CreateAuctionViewModel.Title,
-                Description = input.CreateAuctionViewModel.Description,
-                StartDateString = input.CreateAuctionViewModel.StartDateString,
-                EndDateString = input.CreateAuctionViewModel.EndDateString,
+                Title = newAuction.CreateAuctionViewModel.Title,
+                Description = newAuction.CreateAuctionViewModel.Description,
+                StartDateString = newAuction.CreateAuctionViewModel.StartDateString,
+                EndDateString = newAuction.CreateAuctionViewModel.EndDateString,
                 GroupCode = _apiKey,
-                StartPrice = input.CreateAuctionViewModel.StartPrice,
+                StartPrice = newAuction.CreateAuctionViewModel.StartPrice,
                 CreatedBy = _userService.GetCurrentUserName(),
             };
 
             return viewModel;
         }
 
-        //Klar
         public AuctionModel MakeAuctionApiReady(CreateAuctionViewModel viewModel)
         {
             AuctionModel model = new AuctionModel
@@ -94,8 +91,8 @@ namespace Nackowskiiiii.BusinessLayer
                 Id = currentAuction.UpdateAuctionViewModel.Id,
                 Title = currentAuction.UpdateAuctionViewModel.Title,
                 Description = currentAuction.UpdateAuctionViewModel.Description,
-                StartDateString = currentAuction.UpdateAuctionViewModel.StartDateString,
-                EndDateString = currentAuction.UpdateAuctionViewModel.EndDateString,
+                //StartDateString = currentAuction.UpdateAuctionViewModel.StartDateString,
+                //EndDateString = currentAuction.UpdateAuctionViewModel.EndDateString,
                 GroupCode = _apiKey,
                 StartPrice = currentAuction.UpdateAuctionViewModel.StartPrice,
                 CreatedBy = _userService.GetCurrentUserName(),
@@ -144,7 +141,8 @@ namespace Nackowskiiiii.BusinessLayer
                     GroupCode = _apiKey,
                     StartPrice = currentAuction.StartPrice,
                     CreatedBy = currentAuction.CreatedBy,
-                    Bids = GetAllBidViewModelsForCurrentAuction(currentAuction.Id)
+                    Bids = GetAllBidViewModelsForCurrentAuction(currentAuction.Id),
+                    AuctionIsOpen = GetAuctionIsOpen(currentAuction.Id)
                 }
             };
 
@@ -174,8 +172,8 @@ namespace Nackowskiiiii.BusinessLayer
                         EndDateString = x.SlutDatum,
                         GroupCode = _apiKey,
                         StartPrice = decimal.Parse(x.Utropspris),
-                        CreatedBy = _admin
-                        //AuctionIsOpen = TestGetAuctionIsOpen(Int32.Parse(auctionDb.AuktionID))
+                        CreatedBy = _admin,
+                        AuctionIsOpen = GetAuctionIsOpen(Int32.Parse(x.AuktionID))
                     }
                 }).OrderBy(auction => auction.GeneralAuctionViewModel.Title);
 
@@ -299,7 +297,7 @@ namespace Nackowskiiiii.BusinessLayer
             IEnumerable<TestAuctionViewModel> allAuctions = SetGeneralAuctionViewModelList(allAuctionsDb);
 
             IEnumerable<TestAuctionViewModel> openAuctions = allAuctions.
-                                                           Where(auction => auction.GeneralAuctionViewModel.AuctionIsOpen == false).ToList();
+                                                           Where(auction => auction.GeneralAuctionViewModel.AuctionIsOpen == true).ToList();
 
             return openAuctions;
         }
@@ -316,12 +314,10 @@ namespace Nackowskiiiii.BusinessLayer
 
             if (endDateConverted > todayConverted)
             {
-                //currentAuction.AuctionIsOpen = true;
                 return true;
             }
             else
             {
-                //currentAuction.AuctionIsOpen = false;
                 return false;
             }
         }

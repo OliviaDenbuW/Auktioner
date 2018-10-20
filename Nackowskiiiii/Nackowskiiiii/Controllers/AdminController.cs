@@ -43,8 +43,7 @@ namespace Nackowskiiiii.Controllers
         {
             if (ModelState.IsValid)
             {
-                CreateAuctionViewModel viewModel = _businessService.GetCreateViewModel(newAuction);
-                //viewModel.AuctionIsOpen = _businessService.TestGetAuctionIsOpen(viewModel.Id);
+                CreateAuctionViewModel viewModel = _businessService.SetCreateViewModel(newAuction);
 
                 AuctionModel model = _businessService.MakeAuctionApiReady(viewModel);
 
